@@ -1,0 +1,28 @@
+server:
+  port: 8081
+  forward-headers-strategy: framework
+
+logging:
+  level:
+    org.springframework.web: WARN
+    com.datastax.astra: INFO
+    root: WARN
+
+spring:
+  cassandra:
+    schema-action: CREATE_IF_NOT_EXISTS
+
+astra:
+  api:
+    application-token: AstraCS:mtgnCvjeYBSHaEXbnnqmxsJl:554bad92631c9a69d143d6473c20dbf2f9a96179d2bb1b39caae4fcfb785cff2
+    database-id: 692ced90-751f-4cc0-aa70-44fe9df81806
+    database-region: europe-west1
+  cql:
+    enabled: true
+    download-scb:
+      enabled: true
+    driver-config:
+      basic:
+        session-keyspace: main
+  metrics:
+    enabled: true
