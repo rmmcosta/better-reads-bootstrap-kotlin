@@ -7,6 +7,8 @@ logging:
     org.springframework.web: WARN
     com.datastax.astra: INFO
     root: WARN
+  file:
+    logs/better-reads-kotlin-bootstrap.log
 
 spring:
   cassandra:
@@ -26,3 +28,4 @@ astra:
         session-keyspace: main
   metrics:
     enabled: true
+

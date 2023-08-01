@@ -1,5 +1,7 @@
 package com.rmmcosta.betterreadskotlinbootstrap
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.rmmcosta.betterreadskotlinbootstrap.author.Author
 import com.rmmcosta.betterreadskotlinbootstrap.author.AuthorRepository
 import org.json.JSONObject
@@ -10,13 +12,15 @@ import kotlin.io.path.Path
 
 const val FILE_AUTHORS_PATH = "src/main/resources/test-authors.txt"
 
+val logger: Logger = LoggerFactory.getLogger(BetterReadsKotlinBootstrapApplication::class.java)
+
 @SpringBootApplication
 class BetterReadsKotlinBootstrapApplication(
     val authorRepository: AuthorRepository
 ) {
     var countAuthors = 0
     fun bootstrap() {
-        //println("bootstrap data inside bootstrap function")
+        logger.info("bootstrap data inside bootstrap function")
         bootstrapAuthors()
         //bootstrapBooks()
     }
@@ -26,21 +30,21 @@ class BetterReadsKotlinBootstrapApplication(
     }
 
     fun bootstrapAuthors() {
-        println("number of authors before: $countAuthors")
+        logger.info("number of authors before: $countAuthors")
         val authorsBuffer = Files.newBufferedReader(Path(FILE_AUTHORS_PATH))
         authorsBuffer.lines().forEach { line -> saveAuthor(getAuthorFromJson(authorLineToJsonString(line))) }
-        println("number of authors after: $countAuthors")
+        logger.info("number of authors after: $countAuthors")
     }
 
     fun authorLineToJsonString(authorLine: String?): String? {
         if (authorLine == null) {
-            println("null")
+            logger.warn("null")
             return null
         }
         val jsonStartIdx = authorLine.indexOf('{')
 
         val authorJsonString = authorLine.substring(jsonStartIdx)
-        println(authorJsonString)
+        logger.info(authorJsonString)
         return authorJsonString
     }
 
@@ -58,7 +62,7 @@ class BetterReadsKotlinBootstrapApplication(
 
     fun saveAuthor(author: Author?) {
         countAuthors++
-        println(countAuthors)
+        logger.info("current count Authors: $countAuthors")
         if (author != null) authorRepository.save(author)
     }
 }
