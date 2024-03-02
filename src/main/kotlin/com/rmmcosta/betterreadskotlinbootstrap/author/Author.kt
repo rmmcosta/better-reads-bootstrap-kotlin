@@ -12,9 +12,12 @@ import org.springframework.data.cassandra.core.mapping.Table
 class Author(
     @Id @PrimaryKeyColumn(name = "author_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     var id: String,
+
     @Column("author_name")
     @CassandraType(type = Name.TEXT)
-    var name: String,@Column("personal_name")
+    var name: String,
+
+    @Column("personal_name")
     @CassandraType(type = Name.TEXT)
     var personalName: String,
 )
