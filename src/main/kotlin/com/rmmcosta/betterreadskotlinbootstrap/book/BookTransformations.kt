@@ -22,7 +22,7 @@ private fun getBookFromJson(bookJson: String?, authorRepository: AuthorRepositor
     val bookCoverIds = bookJsonObject.optJSONArray("covers")
     val bookAuthorIds =
         bookAuthors.map { JSONObject(it.toString()).getJSONObject("author").getString("key").replace("/authors/", "") }
-    val bookAuthorNames = bookAuthorIds.map { authorRepository.findById(it).get().name }
+    val bookAuthorNames = bookAuthorIds.map { getAuthorNameFromId(it, authorRepository) }
 
     return Book(
         bookKey,
@@ -42,4 +42,9 @@ private fun bookLineToJsonString(bookLine: String?): String {
     }
     val jsonStartIdx = bookLine.indexOf('{')
     return bookLine.substring(jsonStartIdx)
+}
+
+private fun getAuthorNameFromId(authorId: String, authorRepository: AuthorRepository): String {
+    val author = authorRepository.findById(authorId)
+    return if (author.isPresent) author.get().name ?: "unknown" else "unknown"
 }

@@ -13,7 +13,7 @@ private fun getAuthorFromJson(authorJson: String?): Author? {
 
     val authorJsonObject = JSONObject(authorJson)
     val authorKey = authorJsonObject.getString("key").replace("/authors/", "")
-    val authorName = authorJsonObject.getString("name")
+    val authorName = authorJsonObject.optString("name") ?: "unknown"
     val authorPersonalName =
         if (authorJsonObject.has("personal_name")) authorJsonObject.getString("personal_name") else authorName
 
