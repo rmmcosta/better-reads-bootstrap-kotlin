@@ -29,3 +29,9 @@ astra:
   metrics:
     enabled: true
 
+data-dump:
+  authors:
+    path: src/main/resources/test-authors.txt
+  books:
+    path: src/main/resources/test-works.txt
+
