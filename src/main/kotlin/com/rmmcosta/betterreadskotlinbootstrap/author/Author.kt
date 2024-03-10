@@ -13,11 +13,11 @@ class Author(
     @Id @PrimaryKeyColumn(name = "author_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     var id: String,
 
-    @Column("author_name")
+    @Column(value = "author_name")
     @CassandraType(type = Name.TEXT)
     var name: String?,
 
-    @Column("personal_name")
+    @Column(value = "personal_name")
     @CassandraType(type = Name.TEXT)
     var personalName: String?,
 )

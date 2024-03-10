@@ -12,7 +12,7 @@ logging:
 
 spring:
   cassandra:
-    schema-action: RECREATE
+    schema-action: CREATE_IF_NOT_EXISTS
 
 astra:
   api:
